@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            FareClubs Contest | Book More. Win a  Meet & Greet with Elvish Yadav.
+        </title>
+        <meta
+            name="description"
+            content="Book flights and packages with FareClubs, climb the contest leaderboard, and unlock an exclusive meet-and-greet in Dubai."
+        />
+        <meta property="og:title" content="FareClubs Contest" />
+        <meta
+            property="og:description"
+            content="Turn every booking into a chance to win the ultimate Dubai meet-and-greet."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="assets/elvish.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            brand: {
+                                pink: "#ff4db8",
+                                blue: "#4f8cff",
+                                cyan: "#3de6ff",
+                            },
+                            canvas: "#05060a",
+                            panel: "#0d1019",
+                        },
+                        boxShadow: {
+                            glow: "0 0 40px rgba(79,140,255,.28)",
+                            pink: "0 0 40px rgba(255,77,184,.25)",
+                        },
+                    },
+                },
+            };
+        </script>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+            :root {
+                color-scheme: dark;
+            }
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: "Inter", system-ui, sans-serif;
+                background: #05060a;
+                color: #f7f8ff;
+                overflow-x: hidden;
+            }
+
+            .surface-grid {
+                position: fixed;
+                inset: 0;
+                z-index: -2;
+                background:
+                    radial-gradient(
+                        circle at 15% 18%,
+                        rgba(61, 230, 255, 0.2),
+                        transparent 36%
+                    ),
+                    radial-gradient(
+                        circle at 84% 6%,
+                        rgba(255, 77, 184, 0.24),
+                        transparent 32%
+                    ),
+                    radial-gradient(
+                        circle at 40% 80%,
+                        rgba(79, 140, 255, 0.2),
+                        transparent 34%
+                    ),
+                    linear-gradient(
+                        150deg,
+                        #05060a 0%,
+                        #080a13 45%,
+                        #05060a 100%
+                    );
+            }
+
+            .surface-grid::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(
+                        rgba(255, 255, 255, 0.03) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(255, 255, 255, 0.03) 1px,
+                        transparent 1px
+                    );
+                background-size: 52px 52px;
+                opacity: 0.18;
+                mask-image: radial-gradient(
+                    circle at center,
+                    #000 30%,
+                    transparent 90%
+                );
+            }
+
+            .site-header {
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                background: rgba(7, 9, 15, 0.56);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+                transition: transform 0.35s ease;
+            }
+
+            .site-header.is-hidden {
+                transform: translateY(-110%);
+            }
+
+            .hero {
+                position: relative;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+
+            .hero-media {
+                position: absolute;
+                inset: 0;
+                overflow: hidden;
+                pointer-events: none;
+            }
+
+            .hero-media::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                    circle at 34% 22%,
+                    rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0) 42%
+                );
+                mix-blend-mode: screen;
+                opacity: 0.45;
+                z-index: 1;
+            }
+
+            .hero-photo {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(
+                        105deg,
+                        rgba(5, 6, 10, 0.08),
+                        rgba(5, 6, 10, 0.44)
+                    ),
+                    url("assets/elvish.jpg");
+                background-size: cover;
+                background-position: 42% 2%;
+                filter: brightness(0.98) contrast(1.08) saturate(1.1);
+                transform-origin: center;
+                will-change: transform;
+            }
+
+            @media (max-width: 1024px) {
+                .hero-photo {
+                    background-position: 52% 8%;
+                }
+            }
+
+            @media (min-width: 1280px) {
+                .hero-photo {
+                    background-position: 40% 0%;
+                }
+            }
+
+            .hero-fade {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to top,
+                    #05060a 2%,
+                    transparent 58%,
+                    rgba(5, 6, 10, 0.16) 100%
+                );
+            }
+
+            .pill {
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 9999px;
+            }
+
+            .logo-overlay {
+                mix-blend-mode: screen;
+                filter: drop-shadow(0 0 14px rgba(79, 140, 255, 0.3));
+            }
+
+            .glass-card {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.03)
+                );
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-radius: 24px;
+            }
+
+            .section-title {
+                letter-spacing: -0.03em;
+            }
+
+            .step-card,
+            .proof-card,
+            .table-shell,
+            .cta-panel {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                background: linear-gradient(
+                    175deg,
+                    rgba(255, 255, 255, 0.08),
+                    rgba(255, 255, 255, 0.02)
+                );
+                border-radius: 24px;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+
+            .step-card {
+                transition: transform 0.35s ease;
+            }
+
+            .step-card:hover {
+                transform: translateY(-6px);
+            }
+
+            .table-shell {
+                overflow: hidden;
+            }
+
+            .table-shell table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .table-shell thead {
+                background: rgba(255, 255, 255, 0.04);
+                text-transform: uppercase;
+                letter-spacing: 0.14em;
+                font-size: 0.72rem;
+                color: rgba(247, 248, 255, 0.58);
+            }
+
+            .table-shell th,
+            .table-shell td {
+                padding: 1rem 1.25rem;
+            }
+
+            .table-shell tbody tr {
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+                transition: background-color 0.25s ease;
+            }
+
+            .table-shell tbody tr:hover {
+                background-color: rgba(255, 255, 255, 0.03);
+            }
+
+            .rank-badge {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 9999px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.85rem;
+                font-weight: 700;
+            }
+
+            .rank-1 {
+                color: #070707;
+                background: linear-gradient(135deg, #ffe27a, #ffb020);
+            }
+
+            .rank-2 {
+                color: #070707;
+                background: linear-gradient(135deg, #f0f3ff, #aeb7d4);
+            }
+
+            .rank-3 {
+                color: #f6f6f6;
+                background: linear-gradient(135deg, #d6894a, #7d4a2a);
+            }
+
+            .btn-primary {
+                border-radius: 14px;
+                color: #03040a;
+                font-weight: 700;
+                background: linear-gradient(
+                    110deg,
+                    #3de6ff 0%,
+                    #4f8cff 44%,
+                    #ff4db8 100%
+                );
+                transition: transform 0.2s ease;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+            }
+
+            .btn-secondary {
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.22);
+                background: rgba(255, 255, 255, 0.06);
+            }
+
+            .hero-reveal {
+                opacity: 1;
+            }
+
+            .reveal,
+            .reveal-up,
+            .reveal-left,
+            .reveal-right {
+                opacity: 0;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+
+                .hero-photo,
+                .step-card,
+                .btn-primary {
+                    transform: none !important;
+                    transition: none !important;
+                }
+
+                .reveal,
+                .hero-reveal,
+                .reveal-up,
+                .reveal-left,
+                .reveal-right {
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="surface-grid" aria-hidden="true"></div>
+
+        <header id="site-header" class="site-header fixed inset-x-0 top-0 z-50">
+            <div
+                class="max-w-7xl mx-auto px-5 lg:px-10 h-20 flex items-center justify-between"
+            >
+                <a href="#top" class="flex items-center gap-3">
+                    <img
+                        src="assets/Farelogo.png"
+                        alt="FareClubs"
+                        class="h-8 w-auto logo-overlay"
+                    />
+                </a>
+                <nav
+                    class="hidden md:flex items-center gap-8 text-sm text-white/75 font-medium"
+                >
+                    <a href="#how" class="hover:text-white transition"
+                        >How It Works</a
+                    >
+                    <a href="#proof" class="hover:text-white transition"
+                        >Why Book Now</a
+                    >
+                    <a href="#rankings" class="hover:text-white transition"
+                        >Standings</a
+                    >
+                </nav>
+                <a
+                    href="#book-now"
+                    class="btn-primary px-4 py-2.5 text-sm shadow-glow"
+                    >Book & Enter</a
+                >
+            </div>
+        </header>
+
+        <main id="top">
+            <section class="hero">
+                <div class="hero-media" aria-hidden="true">
+                    <div class="hero-photo" id="hero-photo"></div>
+                    <div class="hero-fade"></div>
+                </div>
+
+                <div class="relative z-10 w-full">
+                    <div
+                        class="max-w-7xl mx-auto px-5 lg:px-10 pt-28 pb-20 lg:pt-36 lg:pb-28 lg:flex lg:justify-end"
+                    >
+                        <div class="max-w-3xl lg:text-right">
+                            <div
+                                class="pill inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm tracking-[0.14em] uppercase font-semibold text-white/90 hero-reveal"
+                            >
+                                FareClubs Contest 2026
+                            </div>
+                            <h1
+                                class="mt-6 section-title text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] hero-reveal"
+                            >
+                                Book Smart.
+                                <span
+                                    class="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-pink text-transparent bg-clip-text"
+                                    >Climb Fast.</span
+                                >
+                                Win Big.
+                            </h1>
+                            <p
+                                class="mt-6 text-lg sm:text-xl text-white/78 leading-relaxed max-w-2xl lg:ml-auto hero-reveal"
+                            >
+                               Every FareClubs booking boosts your rank. Top flyers and package bookers unlock an exclusive meet-and-greet experience with Elvish Yadav.
+                            </p>
+                            <div
+                                class="mt-10 flex flex-wrap items-center gap-4 lg:justify-end hero-reveal"
+                                id="book-now"
+                            >
+                                <a
+                                    href="#rankings"
+                                    class="btn-primary px-6 py-3.5 text-base shadow-glow"
+                                    >Start Booking Journey</a
+                                >
+                                <a
+                                    href="#how"
+                                    class="btn-secondary px-6 py-3.5 text-base font-semibold text-white"
+                                    >See How You Win</a
+                                >
+                            </div>
+                            <div
+                                class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 hero-reveal"
+                            >
+                                <div class="glass-card p-4">
+                                    <p
+                                        class="text-xs uppercase tracking-[0.18em] text-white/55"
+                                    >
+                                        Prize Pool
+                                    </p>
+                                    <p class="text-2xl font-bold mt-2">
+                                       Meet Elvish Yadav
+                                    </p>
+                                </div>
+                                <div class="glass-card p-4">
+                                    <p
+                                        class="text-xs uppercase tracking-[0.18em] text-white/55"
+                                    >
+                                        Winner Slots
+                                    </p>
+                                    <p class="text-2xl font-bold mt-2">
+                                        Top 15
+                                    </p>
+                                </div>
+                                <div class="glass-card p-4">
+                                    <p
+                                        class="text-xs uppercase tracking-[0.18em] text-white/55"
+                                    >
+                                        Contest Period
+                                    </p>
+                                    <p class="text-2xl font-bold mt-2">
+                                        March 2026
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-10">
+                <div class="max-w-7xl mx-auto px-5 lg:px-10">
+                    <div class="glass-card p-5 sm:p-7 reveal">
+                        <div
+                            class="grid grid-cols-1 lg:grid-cols-4 gap-4 text-sm sm:text-base"
+                        >
+                            <p class="text-white/70">Fast checkout</p>
+                            <p class="text-white/70">Verified bookings only</p>
+                            <p class="text-white/70">
+                                Rank updates from latest uploads
+                            </p>
+                            <p class="text-white/70">
+                                Transparent leaderboard criteria
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how" class="py-20 lg:py-28">
+                <div class="max-w-7xl mx-auto px-5 lg:px-10">
+                    <div class="max-w-3xl">
+                        <p
+                            class="text-sm uppercase tracking-[0.2em] text-brand-cyan font-semibold reveal-up"
+                        >
+                            How It Works
+                        </p>
+                        <h2
+                            class="section-title text-4xl lg:text-6xl font-black mt-4 reveal-up"
+                        >
+                            Three moves to the top.
+                        </h2>
+                    </div>
+
+                    <div class="mt-12 grid md:grid-cols-3 gap-6">
+                        <article class="step-card p-7 reveal-left">
+                            <p
+                                class="text-brand-cyan font-semibold text-sm tracking-[0.16em] uppercase"
+                            >
+                                Step 01
+                            </p>
+                            <h3 class="text-2xl font-bold mt-4">
+                                Book flights or packages
+                            </h3>
+                            <p class="mt-3 text-white/70 leading-relaxed">
+                                Each confirmed booking adds momentum to your
+                                contest profile and your winning path.
+                            </p>
+                        </article>
+                        <article class="step-card p-7 reveal-up">
+                            <p
+                                class="text-brand-blue font-semibold text-sm tracking-[0.16em] uppercase"
+                            >
+                                Step 02
+                            </p>
+                            <h3 class="text-2xl font-bold mt-4">
+                                Increase booking volume
+                            </h3>
+                            <p class="mt-3 text-white/70 leading-relaxed">
+                                Higher count means stronger leaderboard
+                                placement and more visibility in the race.
+                            </p>
+                        </article>
+                        <article class="step-card p-7 reveal-right">
+                            <p
+                                class="text-brand-pink font-semibold text-sm tracking-[0.16em] uppercase"
+                            >
+                                Step 03
+                            </p>
+                            <h3 class="text-2xl font-bold mt-4">
+                                Secure top 15 spots
+                            </h3>
+                            <p class="mt-3 text-white/70 leading-relaxed">
+                               Top flyers and packagers unlock the final invite for an exclusive meet & greet with Elvish Yadav.
+                            </p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="proof" class="py-8 lg:py-14">
+                <div class="max-w-7xl mx-auto px-5 lg:px-10">
+                    <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
+                        <article class="proof-card p-8 reveal-left">
+                            <p
+                                class="text-sm uppercase tracking-[0.2em] text-brand-pink font-semibold"
+                            >
+                                Why book now
+                            </p>
+                            <h2
+                                class="section-title text-3xl lg:text-5xl font-black mt-4"
+                            >
+                                Early momentum wins contests.
+                            </h2>
+                            <p
+                                class="mt-5 text-white/72 text-lg leading-relaxed"
+                            >
+                                Participants who maintain consistent booking
+                                pace gain a decisive edge as the leaderboard
+                                updates. Build a lead now and defend your top
+                                position.
+                            </p>
+                            <div class="mt-7 flex flex-wrap gap-3 text-sm">
+                                <span class="pill px-3 py-2"
+                                    >Higher booking frequency</span
+                                >
+                                <span class="pill px-3 py-2"
+                                    >More rank stability</span
+                                >
+                                <span class="pill px-3 py-2"
+                                    >Stronger finish probability</span
+                                >
+                            </div>
+                        </article>
+                        <article class="proof-card p-8 reveal-right">
+                            <p
+                                class="text-sm uppercase tracking-[0.2em] text-brand-cyan font-semibold"
+                            >
+                                At a glance
+                            </p>
+                            <div class="mt-5 space-y-5">
+                                <div
+                                    class="flex items-end justify-between border-b border-white/10 pb-3"
+                                >
+                                    <span class="text-white/70"
+                                        >Top flyers selected</span
+                                    >
+                                    <strong class="text-3xl">10</strong>
+                                </div>
+                                <div
+                                    class="flex items-end justify-between border-b border-white/10 pb-3"
+                                >
+                                    <span class="text-white/70"
+                                        >Top package bookers selected</span
+                                    >
+                                    <strong class="text-3xl">5</strong>
+                                </div>
+                                <div
+                                    class="flex items-end justify-between pb-1"
+                                >
+                                    <span class="text-white/70"
+                                        >Final reward</span
+                                    >
+                                    <strong class="text-xl text-brand-pink"
+                                        >Meet Elvish Yadav</strong
+                                    >
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rankings" class="py-20 lg:py-28">
+                <div class="max-w-7xl mx-auto px-5 lg:px-10">
+                    <div class="max-w-3xl">
+                        <p
+                            class="text-sm uppercase tracking-[0.2em] text-brand-blue font-semibold reveal-up"
+                        >
+                            Contest Standings
+                        </p>
+                        <h2
+                            class="section-title text-4xl lg:text-6xl font-black mt-4 reveal-up"
+                        >
+                            Latest leaderboard snapshot.
+                        </h2>
+                        <p class="mt-5 text-white/70 text-lg reveal-up">
+                            Updated from current contest data source. Keep
+                            booking to move up faster.
+                        </p>
+                    </div>
+
+                    <div class="mt-12 grid xl:grid-cols-2 gap-7">
+                        <article class="table-shell reveal-left">
+                            <div
+                                class="px-5 py-4 border-b border-white/10 bg-white/[0.02]"
+                            >
+                                <h3 class="text-2xl font-bold">Top Flyers</h3>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th class="text-right">Flights</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="flyers-body"></tbody>
+                                </table>
+                            </div>
+                        </article>
+
+                        <article class="table-shell reveal-right">
+                            <div
+                                class="px-5 py-4 border-b border-white/10 bg-white/[0.02]"
+                            >
+                                <h3 class="text-2xl font-bold">
+                                    Top Package Bookers
+                                </h3>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Rank</th>
+                                            <th>Name</th>
+                                            <th class="text-right">Packages</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="packages-body"></tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pb-24 lg:pb-32">
+                <div class="max-w-7xl mx-auto px-5 lg:px-10">
+                    <div class="cta-panel p-8 sm:p-12 lg:p-14 reveal-up">
+                        <div class="max-w-4xl">
+                            <p
+                                class="text-sm uppercase tracking-[0.2em] text-brand-pink font-semibold"
+                            >
+                                Final Push
+                            </p>
+                            <h2
+                                class="section-title text-4xl lg:text-6xl font-black mt-5"
+                            >
+                                Your next booking can change your rank.
+                            </h2>
+                            <p class="mt-6 text-lg text-white/78">
+                                Enter now, maintain momentum, and secure a top
+                                spot before the final leaderboard lock.
+                            </p>
+                            <div class="mt-8 flex flex-wrap gap-4">
+                                <a
+                                    href="#rankings"
+                                    class="btn-primary px-7 py-3.5 text-base shadow-pink"
+                                    >Book to Climb Ranking</a
+                                >
+                                <a
+                                    href="#how"
+                                    class="btn-secondary px-7 py-3.5 text-base font-semibold text-white"
+                                    >Review Contest Steps</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="border-t border-white/10 py-10">
+            <div
+                class="max-w-7xl mx-auto px-5 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-5 text-sm"
+            >
+                <img
+                    src="assets/Farelogo.png"
+                    alt="FareClubs"
+                    class="h-7 w-auto opacity-80 logo-overlay"
+                />
+                <p class="text-white/55">
+                    © 2026 FareClubs. Contest platform preview.
+                </p>
+            </div>
+        </footer>
+
+        <script>
+            const prefersReducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)",
+            ).matches;
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            if (!prefersReducedMotion) {
+                const lenis = new Lenis({
+                    duration: 1.1,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                    smoothWheel: true,
+                });
+
+                lenis.on("scroll", ScrollTrigger.update);
+                gsap.ticker.add((time) => lenis.raf(time * 1000));
+                gsap.ticker.lagSmoothing(0);
+            }
+
+            const header = document.getElementById("site-header");
+            let lastScrollY = 0;
+            window.addEventListener("scroll", () => {
+                const currentY = window.scrollY;
+                if (currentY > lastScrollY && currentY > 120) {
+                    header.classList.add("is-hidden");
+                } else {
+                    header.classList.remove("is-hidden");
+                }
+                lastScrollY = currentY;
+            });
+
+            if (!prefersReducedMotion) {
+                const introTl = gsap.timeline({
+                    defaults: { ease: "power3.out" },
+                });
+                introTl
+                    .from(".site-header", { y: -48, opacity: 0, duration: 0.8 })
+                    .from(
+                        ".hero .hero-reveal",
+                        { y: 42, opacity: 0, stagger: 0.12, duration: 0.95 },
+                        "-=0.45",
+                    )
+                    .from(
+                        ".hero .glass-card",
+                        { y: 26, opacity: 0, stagger: 0.08, duration: 0.75 },
+                        "-=0.65",
+                    );
+
+                gsap.to("#hero-photo", {
+                    scale: 1.08,
+                    yPercent: 12,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".hero",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true,
+                    },
+                });
+
+                gsap.utils.toArray(".reveal").forEach((element) => {
+                    gsap.fromTo(
+                        element,
+                        { opacity: 0, y: 24 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.8,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: element,
+                                start: "top 82%",
+                            },
+                        },
+                    );
+                });
+
+                gsap.utils.toArray(".reveal-up").forEach((element) => {
+                    gsap.fromTo(
+                        element,
+                        { opacity: 0, y: 40 },
+                        {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.9,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: element,
+                                start: "top 84%",
+                            },
+                        },
+                    );
+                });
+
+                gsap.utils.toArray(".reveal-left").forEach((element) => {
+                    gsap.fromTo(
+                        element,
+                        { opacity: 0, x: -34 },
+                        {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.9,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: element,
+                                start: "top 84%",
+                            },
+                        },
+                    );
+                });
+
+                gsap.utils.toArray(".reveal-right").forEach((element) => {
+                    gsap.fromTo(
+                        element,
+                        { opacity: 0, x: 34 },
+                        {
+                            opacity: 1,
+                            x: 0,
+                            duration: 0.9,
+                            ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: element,
+                                start: "top 84%",
+                            },
+                        },
+                    );
+                });
+            } else {
+                document
+                    .querySelectorAll(
+                        ".reveal, .reveal-up, .reveal-left, .reveal-right",
+                    )
+                    .forEach((el) => (el.style.opacity = "1"));
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement("div");
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function buildRow(entry) {
+                const rankClass =
+                    entry.rank <= 3
+                        ? `rank-${entry.rank}`
+                        : "bg-white/10 text-white/80 border border-white/20";
+
+                return `
+                    <tr class="data-row opacity-0 translate-y-[10px]">
+                        <td><span class="rank-badge ${rankClass}">${entry.rank}</span></td>
+                        <td class="font-semibold text-white/90">${escapeHtml(entry.name)}</td>
+                        <td class="text-right font-bold">${entry.bookings}</td>
+                    </tr>
+                `;
+            }
+
+            function renderErrorRows() {
+                const message =
+                    '<tr><td colspan="3" class="text-center py-8 text-white/55">Leaderboard currently unavailable. Please refresh shortly.</td></tr>';
+                document.getElementById("flyers-body").innerHTML = message;
+                document.getElementById("packages-body").innerHTML = message;
+            }
+
+            fetch("data.json")
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById("flyers-body").innerHTML =
+                        data.topFlyers.map((entry) => buildRow(entry)).join("");
+                    document.getElementById("packages-body").innerHTML =
+                        data.topPackages
+                            .map((entry) => buildRow(entry))
+                            .join("");
+
+                    if (!prefersReducedMotion) {
+                        ScrollTrigger.batch(".data-row", {
+                            start: "top 90%",
+                            onEnter: (batch) =>
+                                gsap.to(batch, {
+                                    opacity: 1,
+                                    y: 0,
+                                    duration: 0.55,
+                                    stagger: 0.06,
+                                    ease: "power2.out",
+                                    overwrite: true,
+                                }),
+                        });
+                    } else {
+                        document
+                            .querySelectorAll(".data-row")
+                            .forEach((row) => {
+                                row.style.opacity = "1";
+                                row.style.transform = "none";
+                            });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Failed to load contest data:", error);
+                    renderErrorRows();
+                });
+        </script>
+    </body>
+</html>

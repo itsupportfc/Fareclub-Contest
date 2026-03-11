@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root{
+    color-scheme:dark;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    font-family:"Inter",system-ui,sans-serif;
+    background:#05060a;
+    color:#f7f8ff;
+    overflow-x:hidden;
+}
+
+/* Background */
+
+.surface-grid{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+    radial-gradient(circle at 15% 18%,rgba(61,230,255,.2),transparent 36%),
+    radial-gradient(circle at 84% 6%,rgba(255,77,184,.24),transparent 32%),
+    radial-gradient(circle at 40% 80%,rgba(79,140,255,.2),transparent 34%),
+    linear-gradient(150deg,#05060a 0%,#080a13 45%,#05060a 100%);
+}
+
+.surface-grid::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:52px 52px;
+    opacity:.18;
+}
+
+/* Header */
+
+.site-header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    backdrop-filter:blur(14px);
+    background:rgba(7,9,15,.6);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    z-index:100;
+}
+
+.header-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 20px;
+}
+
+nav{
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#c9c9d4;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+/* Hero */
+
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.hero-media{
+    position:absolute;
+    inset:0;
+}
+
+.hero-photo{
+    position:absolute;
+    inset:0;
+    background:
+    linear-gradient(105deg,rgba(5,6,10,.1),rgba(5,6,10,.45)),
+    url("assets/elvish.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.hero-fade{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,#05060a 5%,transparent 60%);
+}
+
+.hero-content{
+    position:relative;
+    max-width:900px;
+    padding:140px 20px 80px;
+    text-align:center;
+}
+
+.hero-content h1{
+    font-size:56px;
+    line-height:1.1;
+    font-weight:800;
+}
+
+.hero-content span{
+    background:linear-gradient(90deg,#3de6ff,#4f8cff,#ff4db8);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero-content p{
+    margin-top:18px;
+    color:#c5c5d2;
+    font-size:18px;
+}
+
+/* Buttons */
+
+.hero-content a{
+    display:inline-block;
+    margin-top:25px;
+    margin-right:12px;
+    padding:12px 26px;
+    border-radius:12px;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.hero-content a:first-child{
+    background:linear-gradient(110deg,#3de6ff,#4f8cff,#ff4db8);
+    color:#05060a;
+}
+
+.hero-content a:last-child{
+    border:1px solid rgba(255,255,255,.25);
+    color:white;
+}
+
+/* Hero stats */
+
+.hero-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+    margin-top:40px;
+}
+
+.hero-stats div{
+    padding:18px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(255,255,255,.04);
+}
+
+.hero-stats p:first-child{
+    font-size:12px;
+    opacity:.6;
+}
+
+.hero-stats p:last-child{
+    font-size:20px;
+    font-weight:700;
+}
+
+/* Sections */
+
+section{
+    padding:90px 20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+section h2{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+section p{
+    color:#c4c4d2;
+}
+
+/* Steps */
+
+article{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    padding:28px;
+    border-radius:20px;
+    margin-top:20px;
+}
+
+/* Tables */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+thead{
+    background:rgba(255,255,255,.05);
+}
+
+th,td{
+    padding:14px;
+    text-align:left;
+}
+
+tbody tr{
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+/* Footer */
+
+footer{
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:30px 20px;
+    text-align:center;
+}
+
+footer img{
+    height:28px;
+    margin-bottom:10px;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.hero-content h1{
+    font-size:40px;
+}
+
+.hero-stats{
+    grid-template-columns:1fr;
+}
+
+nav{
+    display:none;
+}
+
+}
