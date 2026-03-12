@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
     <head>
+        <link rel="icon" type="image/png" href="assets/Fav.jpeg" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
@@ -59,7 +60,35 @@
                 color: #f7f8ff;
                 overflow-x: hidden;
             }
+.name-greyout {
+    position: relative;
+    display: inline-block;
+    min-width: 160px;
+}
 
+.blur-name {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.35);
+    filter: blur(2px);
+    user-select: none;
+}
+
+.updated-soon-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: rgba(120, 120, 120, 0.35);
+    border-radius: 8px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
             .surface-grid {
                 position: fixed;
                 inset: 0;
@@ -457,7 +486,7 @@
                                         Winner Slots
                                     </p>
                                     <p class="text-2xl font-bold mt-2">
-                                        Top 15
+                                        Top 20
                                     </p>
                                 </div>
                                 <div class="glass-card p-4">
@@ -546,7 +575,7 @@
                                 Step 03
                             </p>
                             <h3 class="text-2xl font-bold mt-4">
-                                Secure top 15 spots
+                                Secure top 20 spots
                             </h3>
                             <p class="mt-3 text-white/70 leading-relaxed">
                                Top flyers and packagers unlock the final invite for an exclusive meet & greet with Elvish Yadav.
@@ -614,6 +643,14 @@
                                     <strong class="text-3xl">5</strong>
                                 </div>
                                 <div
+                                    class="flex items-end justify-between border-b border-white/10 pb-3"
+                                >
+                                    <span class="text-white/70"
+                                        >Top Social Media Creator</span
+                                    >
+                                    <strong class="text-3xl">5</strong>
+                                </div>
+                                <div
                                     class="flex items-end justify-between pb-1"
                                 >
                                     <span class="text-white/70"
@@ -643,8 +680,7 @@
                             Latest leaderboard snapshot.
                         </h2>
                         <p class="mt-5 text-white/70 text-lg reveal-up">
-                            Updated from current contest data source. Keep
-                            booking to move up faster.
+                            Updated from the current contest data source. Keep booking to move up faster. It will be updated every Monday.
                         </p>
                     </div>
 
@@ -887,19 +923,24 @@
             }
 
             function buildRow(entry) {
-                const rankClass =
-                    entry.rank <= 3
-                        ? `rank-${entry.rank}`
-                        : "bg-white/10 text-white/80 border border-white/20";
+    const rankClass =
+        entry.rank <= 3
+            ? `rank-${entry.rank}`
+            : "bg-white/10 text-white/80 border border-white/20";
 
-                return `
-                    <tr class="data-row opacity-0 translate-y-[10px]">
-                        <td><span class="rank-badge ${rankClass}">${entry.rank}</span></td>
-                        <td class="font-semibold text-white/90">${escapeHtml(entry.name)}</td>
-                        <td class="text-right font-bold">${entry.bookings}</td>
-                    </tr>
-                `;
-            }
+    return `
+        <tr class="data-row opacity-0 translate-y-[10px]">
+            <td><span class="rank-badge ${rankClass}">${entry.rank}</span></td>
+            <td>
+                <div class="name-greyout">
+                    <span class="blur-name">${escapeHtml(entry.name)}</span>
+                    <span class="updated-soon-label">Updating soon</span>
+                </div>
+            </td>
+            <td class="text-right font-bold">${entry.bookings}</td>
+        </tr>
+    `;
+}
 
             function renderErrorRows() {
                 const message =
