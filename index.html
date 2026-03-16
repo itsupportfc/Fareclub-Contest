@@ -60,6 +60,154 @@
                 color: #f7f8ff;
                 overflow-x: hidden;
             }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 999;
+    }
+
+    .modal:target {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 850px;
+      max-height: 85vh;
+      overflow-y: auto;
+      background: #1f2937;
+      color: #f9fafb;
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .modal-box h2 {
+      margin-top: 0;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .modal-box h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      margin-top: 22px;
+      color: #93c5fd;
+    }
+
+    .modal-box p {
+      line-height: 1.7;
+      color: #e5e7eb;
+      margin: 0;
+    }
+
+    .modal-action {
+      margin-top: 28px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .close-btn {
+      background: #374151;
+    }
+
+    .close-btn:hover {
+      background: #4b5563;
+    }
+           .countdown-wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  text-align: center;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.countdown-box {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  min-width: 0;
+  background: #222;
+  color: #fff;
+  border-radius: 12px;
+}
+
+.count-number {
+  font-family: monospace;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.count-label {
+  margin-top: 8px;
+  font-size: 14px;
+  text-transform: lowercase;
+}
+
+@media (max-width: 768px) {
+  .countdown-wrapper {
+    gap: 12px;
+    max-width: 320px;
+  }
+
+  .countdown-box {
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .count-number {
+    font-size: 34px;
+  }
+
+  .count-label {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-wrapper {
+    grid-template-columns: repeat(2, minmax(90px, 1fr));
+    gap: 10px;
+    max-width: 220px;
+  }
+
+  .countdown-box {
+    padding: 10px 8px;
+  }
+
+  .count-number {
+    font-size: 28px;
+  }
+
+  .count-label {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+}
 .name-greyout {
     position: relative;
     display: inline-block;
@@ -451,6 +599,27 @@
                             >
                                Every FareClubs booking boosts your rank. Top flyers and package bookers unlock an exclusive meet-and-greet experience with Elvish Yadav.
                             </p>
+                            <div class="countdown-wrapper">
+  <div class="countdown-box">
+    <span id="days" class="count-number">58</span>
+    <span class="count-label">days</span>
+  </div>
+
+  <div class="countdown-box">
+    <span id="hours" class="count-number">10</span>
+    <span class="count-label">hours</span>
+  </div>
+
+  <div class="countdown-box">
+    <span id="minutes" class="count-number">24</span>
+    <span class="count-label">min</span>
+  </div>
+
+  <div class="countdown-box">
+    <span id="seconds" class="count-number">59</span>
+    <span class="count-label">sec</span>
+  </div>
+</div>
                             <div
                                 class="mt-10 flex flex-wrap items-center gap-4 lg:justify-end hero-reveal"
                                 id="book-now"
@@ -778,6 +947,59 @@
                 <p class="text-white/55">
                     © 2026 FareClubs. Contest platform preview.
                 </p>
+
+                <a href="#terms_modal" class="btn">Terms & Conditions</a>
+
+  <div class="modal" id="terms_modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+    <div class="modal-box">
+      <h2 id="terms-title">Terms &amp; Conditions – Fareclubs Creator Contest</h2>
+
+      <h3>1. Organizer</h3>
+      <p>This contest is organized by Fareclubs (“Organizer”).</p>
+
+      <h3>2. Eligibility</h3>
+      <p>Participation is open to individuals 18 years or older with active public social media accounts. Employees, partners, and immediate family members of the Organizer are not eligible to participate.</p>
+
+      <h3>3. Contest Participation</h3>
+      <p>Participants must promote Fareclubs travel services by creating reels/videos or other social media content featuring Fareclubs and generate travel bookings or travel package consumption through Fareclubs.</p>
+
+      <h3>4. Winner Selection</h3>
+      <p>The Top 5 creators who generate the highest number of successfully completed and consumed bookings or travel packages through Fareclubs during the contest period will be declared winners.</p>
+      <p>In case two or more participants have the same number of bookings, the participant who completes the bookings earlier (first in time) will be ranked higher.</p>
+
+      <h3>5. Prize</h3>
+      <p>The Top 5 winners will receive an exclusive opportunity to meet Elvish Yadav.</p>
+      <p>The date, location, and format of the meeting will be decided by the Organizer. The prize is non-transferable and cannot be exchanged for cash or any other benefit.</p>
+
+      <h3>6. Verification &amp; Fair Participation</h3>
+      <p>All bookings and activities will be verified by the Organizer. Any fake, manipulated, or fraudulent bookings will result in immediate disqualification.</p>
+
+      <h3>7. Content Responsibility</h3>
+      <p>Participants must ensure that their content is original, lawful, and does not violate any intellectual property rights or applicable laws of India, including provisions under Bharatiya Nyaya Sanhita and other applicable regulations.</p>
+
+      <h3>8. Disqualification</h3>
+      <p>The Organizer reserves the right to disqualify any participant involved in misleading promotions, spam, fake bookings, automated activities, or illegal practices.</p>
+
+      <h3>9. Publicity Consent</h3>
+      <p>By participating in this contest, participants grant Fareclubs the right to use their name, social media handle, photographs, and promotional content for marketing and promotional purposes without additional compensation.</p>
+
+      <h3>10. Modification or Termination</h3>
+      <p>The Organizer reserves the right to modify, suspend, or terminate the contest or these Terms &amp; Conditions at any time without prior notice.</p>
+
+      <h3>11. Governing Law &amp; Jurisdiction</h3>
+      <p>These Terms &amp; Conditions shall be governed by the laws of India. Any dispute arising out of or in connection with this contest shall be subject to the exclusive jurisdiction of the courts located in Gurugram (Gurgaon), Haryana, India.</p>
+
+      <h3>12. Platform Disclaimer</h3>
+      <p>This contest is not sponsored, endorsed, administered, or associated with Instagram, YouTube, or any other social media platform.</p>
+
+      <h3>Acceptance</h3>
+      <p>Participation in the contest implies acceptance of these Terms &amp; Conditions.</p>
+
+      <div class="modal-action">
+        <a href="#" class="btn close-btn">Close</a>
+      </div>
+    </div>
+  </div>
             </div>
         </footer>
 
@@ -941,7 +1163,34 @@
         </tr>
     `;
 }
+const targetDate = new Date("2026-05-11T23:59:59").getTime();
 
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("days").textContent = "0";
+    document.getElementById("hours").textContent = "0";
+    document.getElementById("minutes").textContent = "0";
+    document.getElementById("seconds").textContent = "0";
+    clearInterval(timer);
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+
+updateCountdown();
+const timer = setInterval(updateCountdown, 1000);
             function renderErrorRows() {
                 const message =
                     '<tr><td colspan="3" class="text-center py-8 text-white/55">Leaderboard currently unavailable. Please refresh shortly.</td></tr>';
